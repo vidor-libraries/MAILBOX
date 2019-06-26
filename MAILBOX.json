@@ -1,0 +1,45 @@
+{
+  "module":{
+    "name":"MAILBOX",
+    "version":"1.0",
+    "parameters":[
+      {"name":"pDPRAM_BITS", "def":"9"},
+      {"name":"pFIFO_BITS", "def":"4"}
+    ]
+  },
+  "interfaces":[
+    {
+      "name":"mailbox",
+      "mates":["pins"],
+      "visibility":"2",
+      "signals": [
+        {"name":"rq", "bits":"1", "direction":"input"},
+        {"name":"ak", "bits":"1", "direction":"output"}
+      ]
+    }
+  ],
+  "hw":[
+    {
+      "interface":"avalon_slave",
+      "name":"slv",
+      "parameters":[
+        {"signal":"address", "name":"SPAN", "value":"9"},
+        {"signal":"read_data", "name":"BIT_WIDTH", "value":"32"},
+        {"signal":"write_data", "name":"BIT_WIDTH", "value":"32"}
+      ]
+    },
+    {
+      "interface":"avalon_slave",
+      "name":"mst",
+      "parameters":[
+        {"signal":"address", "name":"SPAN", "value":"9"},
+        {"signal":"read_data", "name":"BIT_WIDTH", "value":"32"},
+        {"signal":"write_data", "name":"BIT_WIDTH", "value":"32"}
+      ]
+    },
+    {
+      "interface":"mailbox",
+      "name":"mailbox"
+    }
+  ]
+}
